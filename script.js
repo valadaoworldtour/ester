@@ -45,10 +45,13 @@ function createHearts() {
         
         // Espalha os corações pela largura da tela
         heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.top = '-5vh';
+        heart.style.top = '-10vh';
         
         // Tamanhos variados para os corações
         heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        
+        // Adiciona um brilho rosa neon nos corações (Cyberpunk / Romance Cósmico)
+        heart.style.filter = 'drop-shadow(0 0 10px #ff2a6d)';
         
         // Velocidades de queda variadas
         heart.style.animation = `fall ${Math.random() * 3 + 2}s linear`;

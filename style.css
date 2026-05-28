@@ -1,9 +1,11 @@
 /* Definindo as cores principais da página */
 :root {
-    --bg-color: #ffe6ea; /* Fundo rosa bem clarinho */
-    --text-color: #4a4a4a; /* Cinza escuro para leitura confortável */
-    --accent-color: #ff4b72; /* Rosa forte/avermelhado para destaques */
-    --box-bg: rgba(255, 255, 255, 0.85); /* Fundo branco um pouco transparente */
+    --bg-color: #ffffff; /* Fundo branco */
+    --text-color: #1a1a1a; /* Texto escuro para leitura */
+    --accent-color: #ff2a6d; /* Rosa neon */
+    --box-bg: rgba(255, 42, 109, 0.08); /* Vidro translúcido (Glassmorphism) */
+    --glass-border: 1px solid rgba(255, 42, 109, 0.3);
+    --neon-glow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
 }
 
 body {
@@ -20,6 +22,7 @@ body {
 h1, h2, h3 {
     font-family: 'Dancing Script', cursive;
     color: var(--accent-color);
+    text-shadow: var(--neon-glow);
 }
 
 .hero {
@@ -28,8 +31,8 @@ h1, h2, h3 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* Um gradiente suave simulando o céu do pôr do sol */
-    background: linear-gradient(135deg, #ffd3db 0%, #ffebf0 100%);
+    /* Fundo claro com brilho sutil no centro */
+    background: radial-gradient(circle at center, #fff0f5 0%, var(--bg-color) 100%);
     padding: 20px;
 }
 
@@ -44,7 +47,7 @@ h1, h2, h3 {
     animation: fadeInUp 2s ease;
 }
 
-.timeline, .counter-section, .message {
+.timeline, .counter-section, .message, .gallery-section {
     padding: 50px 20px;
     max-width: 800px;
     margin: 0 auto;
@@ -56,13 +59,57 @@ h1, h2, h3 {
     margin: 20px auto;
     max-width: 600px;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    backdrop-filter: blur(10px); /* Efeito de vidro */
+    border: var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
     border-left: 5px solid var(--accent-color);
 }
 
 .event:hover {
     transform: scale(1.03); /* Dá um pequeno zoom ao passar o mouse */
+}
+
+/* Estilos para a galeria de fotos */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.photo {
+    background: var(--box-bg);
+    padding: 15px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.photo p {
+    margin: 15px 0 0 0;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    text-shadow: var(--neon-glow);
+}
+
+.photo:hover {
+    transform: scale(1.05) rotate(3deg); /* Dá um zoom e entorta a foto levemente */
 }
 
 #time-counter {
@@ -72,27 +119,33 @@ h1, h2, h3 {
     background: var(--box-bg);
     padding: 20px;
     border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: var(--glass-border);
     display: inline-block;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 button {
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
     padding: 15px 30px;
     font-size: 1.1rem;
     border-radius: 30px;
     cursor: pointer;
     margin-top: 20px;
-    transition: background 0.3s, transform 0.2s;
+    transition: all 0.3s ease;
     font-family: 'Poppins', sans-serif;
-    box-shadow: 0 4px 10px rgba(255, 75, 114, 0.4);
+    box-shadow: var(--neon-glow);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
 }
 
 button:hover {
-    background-color: #e6395e;
-    transform: translateY(-2px);
+    background-color: var(--accent-color);
+    color: #0d0e15;
+    box-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color);
 }
 
 .hidden {
@@ -107,6 +160,116 @@ button:hover {
     font-size: 1.8rem;
     font-family: 'Dancing Script', cursive;
     color: var(--accent-color);
+}
+
+/* --- NOVAS SEÇÕES (Playlist, Motivos e Easter Eggs) --- */
+
+.playlist-section {
+    padding: 50px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Grid de 10 motivos */
+.reasons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Estilo do cartão que vira (Flip Card) */
+.reason-card {
+    width: 200px;
+    height: 150px;
+    perspective: 1000px; /* Cria o ambiente 3D */
+    cursor: pointer;
+}
+
+.reason-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.reason-card:hover .reason-inner {
+    transform: rotateY(180deg);
+}
+
+.reason-front, .reason-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    background: var(--box-bg);
+    backdrop-filter: blur(10px);
+    border: var(--glass-border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.reason-front {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: var(--accent-color);
+    text-shadow: var(--neon-glow);
+}
+
+.reason-back {
+    transform: rotateY(180deg);
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+/* Easter Eggs (Mensagens Ocultas) */
+.easter-egg {
+    position: relative;
+    cursor: help;
+    color: var(--accent-color);
+    border-bottom: 1px dashed var(--accent-color);
+    font-weight: 600;
+}
+
+.easter-egg::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-color);
+    color: #0d0e15;
+    padding: 8px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: var(--neon-glow);
+}
+
+.easter-egg:hover::after {
+    opacity: 1;
+    bottom: 120%;
+}
+
+/* Rodapé da página */
+footer {
+    padding: 30px 20px;
+    background-color: transparent;
+    color: var(--accent-color);
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
 }
 
 /* Animações */
@@ -127,5 +290,6 @@ button:hover {
 
 /* Animação para a chuva de corações */
 @keyframes fall {
-    to { transform: translateY(105vh); }
+    0% { transform: translateY(-5vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
 }
